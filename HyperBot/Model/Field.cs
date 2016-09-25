@@ -174,6 +174,17 @@ namespace HyperBot
 				Wall_X[ 0, i ] = true;
 				Wall_X[ x, i ] = true;
 			}
+			
+			// 中央
+			Wall_X[ 9,      9 ] = true;
+			Wall_X[ 9 + 2,  9 ] = true;
+			Wall_X[ 9,     10 ] = true;
+			Wall_X[ 9 + 2, 10 ] = true;
+			
+			Wall_Y[  9, 9     ] = true;
+			Wall_Y[  9, 9 + 2 ] = true;
+			Wall_Y[ 10, 9     ] = true;
+			Wall_Y[ 10, 9 + 2 ] = true;
 		}
 		
 		#endregion
@@ -219,7 +230,17 @@ namespace HyperBot
 		
 		public void ResetWall_Y( int x, int y )
 		{
-			Wall_Y[ x, y ] = false;
+			Wall_Y[ x, y ] = !Wall_Y[ x, y ];
+		}
+		
+		public void ToggleWall_X( int x, int y )
+		{
+			Wall_X[ x, y ] = !Wall_X[ x, y ];
+		}
+		
+		public void ToggleWall_Y( int x, int y )
+		{
+			Wall_Y[ x, y ] = !Wall_Y[ x, y ];
 		}
 		
 		#endregion

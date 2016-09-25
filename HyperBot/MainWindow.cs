@@ -19,6 +19,8 @@ namespace HyperBot
 		
 		private Field MainField;
 		
+		#region 初期化関係
+		
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -39,6 +41,10 @@ namespace HyperBot
 			MainField.SetWall_Y( 4, 4 );
 			#endif
 		}
+		
+		#endregion
+		
+		#region 描画関係
 		
 		private void MainWindow_Paint(object sender, PaintEventArgs e)
 		{
@@ -100,6 +106,154 @@ namespace HyperBot
 					}
 				}
 			}
+			
+			// 現在選択中の位置を描画
+			using( Pen p1 = new Pen( Color.Red, 2 ) )
+			{
+				if( isVertical )
+				{
+					x0 = curX * BlockSize + ofsLine - 1;
+					x1 = 3;
+					y0 = curY * BlockSize + ofsLine;
+					y1 = BlockSize;
+				}
+				else
+				{
+					x0 = curX * BlockSize + ofsLine;
+					x1 = BlockSize;
+					y0 = curY * BlockSize + ofsLine - 1;
+					y1 = 3;
+				}
+				e.Graphics.DrawRectangle( p1, x0, y0, x1, y1 );
+			}
 		}
+		#endregion
+		
+		#region 操作関係のイベント
+		
+		private int curX;
+		private int curY;
+		private bool isVertical;
+		
+		private void picField_MouseMove(object sender, MouseEventArgs e)
+		{
+			int nextX = Point2Num( e.X, BlockSize,  isVertical );
+			int nextY = Point2Num( e.Y, BlockSize, !isVertical );
+			
+			if( ( nextX != curX ) || ( nextY != curY ) )
+			{
+				curX = nextX;
+				curY = nextY;
+				splTop.Panel2.Refresh();
+				
+				Console.WriteLine( curX.ToString() + ", " + curY.ToString() );
+			}
+		}
+		
+		static private int Point2Num( int pos, int unit, bool revise )
+		{
+			int revCoef = revise ? unit / 2 : 0;
+			return ( pos + revCoef ) / unit;
+		}
+		
+		private void picField_MouseDown(object sender, MouseEventArgs e)
+		{
+			if( e.Button == MouseButtons.Right )
+			{
+				ToggleVH();
+			}
+			
+			if( e.Button == MouseButtons.Left )
+			{
+				SetWall();
+			}
+		}
+		
+		private void ToggleVH()
+		{
+			isVertical = !isVertical;
+			splTop.Panel2.Refresh();
+		}
+		
+		private void SetWall()
+		{
+			if( isVertical )
+			{
+				MainField.ToggleWall_X( curX, curY );
+			}
+			else
+			{
+				MainField.ToggleWall_Y( curX, curY );
+			}
+			splTop.Panel2.Refresh();
+		}
+		
+		private void picRed_MouseDown(object sender, MouseEventArgs e)
+		{
+			
+		}
+		
+		private void picGreen_MouseDown(object sender, MouseEventArgs e)
+		{
+			
+		}
+		
+		private void picBlue_MouseDown(object sender, MouseEventArgs e)
+		{
+			
+		}
+		
+		private void picYellow_MouseDown(object sender, MouseEventArgs e)
+		{
+			
+		}
+		
+		private void picSilver_MouseDown(object sender, MouseEventArgs e)
+		{
+			
+		}
+		
+		#endregion
+		
+		#region 左側に表示するロボ
+		
+		private void picRed_Paint(object sender, PaintEventArgs e)
+		{
+			DrawCircle( (PictureBox)sender, e.Graphics, Color.Red );
+		}
+		
+		private void picGreen_Paint(object sender, PaintEventArgs e)
+		{
+			DrawCircle( (PictureBox)sender, e.Graphics, Color.Green );
+		}
+		
+		private void picBlue_Paint(object sender, PaintEventArgs e)
+		{
+			DrawCircle( (PictureBox)sender, e.Graphics, Color.Blue );
+		}
+		
+		private void picYellow_Paint(object sender, PaintEventArgs e)
+		{
+			DrawCircle( (PictureBox)sender, e.Graphics, Color.Gold );
+		}
+		
+		private void picSilver_Paint(object sender, PaintEventArgs e)
+		{
+			DrawCircle( (PictureBox)sender, e.Graphics, Color.Gray );
+		}
+		
+		private void DrawCircle( PictureBox target, Graphics g, Color col )
+		{
+			using( var p = new Pen( Color.Black, 2 ) )
+			{
+				g.DrawRectangle( p, 0, 0, target.Width, target.Height );
+			}
+			
+			using( var b = new SolidBrush( col ) )
+			{
+				g.FillEllipse( b, 2, 2, target.Width - 4, target.Height - 4 );
+			}
+		}
+		#endregion
 	}
 }
