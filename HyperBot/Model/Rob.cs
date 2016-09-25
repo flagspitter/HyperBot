@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hyb
+namespace HyperBot
 {
 	public class Robot
 	{

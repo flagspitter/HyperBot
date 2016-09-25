@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hyb
+namespace HyperBot
 {
 	public class Field
 	{
@@ -220,6 +220,32 @@ namespace Hyb
 		public void ResetWall_Y( int x, int y )
 		{
 			Wall_Y[ x, y ] = false;
+		}
+		
+		#endregion
+		
+		#region イテレータ関係
+		
+		public IEnumerable<int> GetWalls_X( int y )
+		{
+			for( int i=0; i<Width + 1; i++ )
+			{
+				if( Wall_X[ i, y ] )
+				{
+					yield return i;
+				}
+			}
+		}
+		
+		public IEnumerable<int> GetWalls_Y( int x )
+		{
+			for( int i=0; i<Height + 1; i++ )
+			{
+				if( Wall_Y[ x, i ] )
+				{
+					yield return i;
+				}
+			}
 		}
 		
 		#endregion
