@@ -13,8 +13,8 @@ namespace HyperBot
 	public partial class MainWindow : Form
 	{
 		private int BlockSize = 32;
-		private int xNum = 20;
-		private int yNum = 20;
+		private int xNum = 16;
+		private int yNum = 16;
 		private int ofsLine = 1;
 		
 		private Field MainField;
@@ -190,27 +190,32 @@ namespace HyperBot
 		
 		private void picRed_MouseDown(object sender, MouseEventArgs e)
 		{
-			
+			var tg = (PictureBox)sender;
+			var dde = tg.DoDragDrop( 0, DragDropEffects.All );
 		}
 		
 		private void picGreen_MouseDown(object sender, MouseEventArgs e)
 		{
-			
+			var tg = (PictureBox)sender;
+			var dde = tg.DoDragDrop( 1, DragDropEffects.All );
 		}
 		
 		private void picBlue_MouseDown(object sender, MouseEventArgs e)
 		{
-			
+			var tg = (PictureBox)sender;
+			var dde = tg.DoDragDrop( 2, DragDropEffects.All );
 		}
 		
 		private void picYellow_MouseDown(object sender, MouseEventArgs e)
 		{
-			
+			var tg = (PictureBox)sender;
+			var dde = tg.DoDragDrop( 3, DragDropEffects.All );
 		}
 		
 		private void picSilver_MouseDown(object sender, MouseEventArgs e)
 		{
-			
+			var tg = (PictureBox)sender;
+			var dde = tg.DoDragDrop( 4, DragDropEffects.All );
 		}
 		
 		#endregion

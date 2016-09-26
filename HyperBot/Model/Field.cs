@@ -176,15 +176,15 @@ namespace HyperBot
 			}
 			
 			// 中央
-			Wall_X[ 9,      9 ] = true;
-			Wall_X[ 9 + 2,  9 ] = true;
-			Wall_X[ 9,     10 ] = true;
-			Wall_X[ 9 + 2, 10 ] = true;
+			Wall_X[ 7,      7 ] = true;
+			Wall_X[ 7 + 2,  7 ] = true;
+			Wall_X[ 7,      8 ] = true;
+			Wall_X[ 7 + 2,  8 ] = true;
 			
-			Wall_Y[  9, 9     ] = true;
-			Wall_Y[  9, 9 + 2 ] = true;
-			Wall_Y[ 10, 9     ] = true;
-			Wall_Y[ 10, 9 + 2 ] = true;
+			Wall_Y[  7, 7     ] = true;
+			Wall_Y[  7, 7 + 2 ] = true;
+			Wall_Y[  8, 7     ] = true;
+			Wall_Y[  8, 7 + 2 ] = true;
 		}
 		
 		#endregion
